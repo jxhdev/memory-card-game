@@ -1,0 +1,78 @@
+html {
+    box-sizing: border-box;
+}
+.container{
+    display: block;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 1px dashed black;
+    background: white;
+    margin: 10px;
+}
+
+.scene {
+    display: flex;
+    padding: 10px;
+    height: 128px;
+    width: 128px;
+    perspective: 300px;
+}
+
+.card {
+    
+    border: 2px solid black;
+    flex-basis: 128px;
+    border-radius: 16px;
+    font-size: 2em;
+
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative;
+}
+
+.card.is-flipped {
+    transform: rotateY(180deg);
+    
+}
+
+.card__face {
+    position: absolute;
+    text-align: center;
+    line-height: 128px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    backface-visibility: hidden;
+}
+
+.card__face--front {
+    align-self: center;
+}
+
+.card__face--back {
+    transform: rotateY(180deg);
+}
+
+#middle {
+    flex-basis: 128px;
+    border-radius: 16px;
+    font-size: 2em;
+    
+    background: white;
+    text-align: center;
+    line-height: 128px;
+}
+
+img {
+    height: 124px;
+    width: 124px;
+    border-radius: 16px;
+}
+
+.reveal-img {
+    display: none;
+}
