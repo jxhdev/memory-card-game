@@ -14,8 +14,8 @@ window.onload = function() {
 
 
 function flip (item) {
-    // this is to prevent more than two flips at a time
-    if(flipCount < 2) {
+    // prevent more than two flips at a time
+    if(flipCount <= 1) {
         if (flipOne !== item) {
             clicks += 1;
             count.textContent = clicks;
@@ -29,13 +29,16 @@ function flip (item) {
             flipCount++;
             if (flipOne.lastElementChild.lastElementChild.src ===
                 item.lastElementChild.lastElementChild.src) {
+                    // remove the event listeners
                 setTimeout(function () {
                     flipOne.outerHTML = flipOne.outerHTML;
                     item.outerHTML = item.outerHTML;
+                    flipCount = 0;
                 }, 1000);
-                flipCount = 0;
                 flipsRemaining -= 2;
+
             } else {
+                flipCount = 2;
                 unflip(item);
             }
         }
@@ -48,8 +51,8 @@ function unflip(item) {
     setTimeout(function () {
         flipOne.classList.toggle('is-flipped')
         item.classList.toggle('is-flipped')
+        flipCount = 0;
     }, 1500)
-    flipCount = 0;
 }
 
 };
