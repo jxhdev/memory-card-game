@@ -5,28 +5,24 @@ window.onload = function() {
     let clicks = 0;
     let flipCount = 0;
     let flipOne;
-    let gameOver = false;
     let flipsRemaining = 12;
 
-    // button.addEventListener('click', function() {
-    //     this.parentElement.classList.add('hidden')
-    //     console.log(this.parentElement.classList);
-    // })
+    button.addEventListener('click', function() {
+        this.parentElement.classList.toggle('hidden')
+        console.log(this.parentElement.classList);
+    })
     cards.forEach(item => item.addEventListener('click', function() {
         flip(item)
     }));
 
-    if(flipsRemaining === 0) {
-        console.log('You won! Start a new game?');
-    }
-
 
 function flip (item) {
-    // conditional to ensure less than 2 cards are flipped at a time
+
     if(flipCount <= 1) {
         if (flipOne !== item) {
             clicks += 1;
             count.textContent = clicks;
+            
         } 
         else if(flipOne === item) {
             flipCount = 0;
@@ -40,10 +36,12 @@ function flip (item) {
             item.classList.toggle('is-flipped');
             flipCount++;
             checkMatch(item);
+            
         }
 
     }
 }
+
 
 function checkMatch(item) {
     if (flipOne.lastElementChild.lastElementChild.src ===
@@ -54,11 +52,16 @@ function checkMatch(item) {
             item.outerHTML = item.outerHTML;
             flipCount = 0;
         }, 1000);
-        flipsRemaining -= 2;
+        flipsRemaining -= 1;
+        console.log(flipsRemaining);
 
     } else {
         flipCount = 2;
         unflip(item);
+    }
+    if (flipsRemaining === 0) {
+        setTimeout(gameOver, 1000);
+        
     }
 }
 function unflip(item) {
@@ -69,5 +72,6 @@ function unflip(item) {
         flipCount = 0;
     }, 1500)
 }
+
 
 };
