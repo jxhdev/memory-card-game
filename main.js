@@ -9,7 +9,6 @@ window.onload = function() {
 
     button.addEventListener('click', function() {
         this.parentElement.classList.toggle('hidden')
-        console.log(this.parentElement.classList);
     })
     cards.forEach(item => item.addEventListener('click', function() {
         flip(item)
@@ -32,7 +31,8 @@ function flip (item) {
             count.textContent = clicks;
         } else {
             item.classList.toggle('is-flipped')
-            checkMatch(item); 
+            flipCount = 2;
+            checkMatch(item);
             clicks += 1;
             count.textContent = clicks;
         }
@@ -42,18 +42,15 @@ function flip (item) {
 function checkMatch(item) {
     if (flipOne.lastElementChild.lastElementChild.src ===
         item.lastElementChild.lastElementChild.src) {
-
         setTimeout(function () {
             flipOne.outerHTML = flipOne.outerHTML;
             item.outerHTML = item.outerHTML;
             flipCount = 0;
-        }, 1000);
+        }, 750);
         flipsRemaining -= 1;
-        console.log(flipsRemaining);
-
     } else {
-        flipCount = 2;
         unflip(item);
+        
     }
     if (flipsRemaining === 0) {
         console.log('You won!');
@@ -61,12 +58,12 @@ function checkMatch(item) {
     }
 }
 function unflip(item) {
-
+    flipCount = 2;
     setTimeout(function () {
         flipOne.classList.toggle('is-flipped')
         item.classList.toggle('is-flipped')
         flipCount = 0;
-    }, 1500)
+    }, 750);
 }
 
 
