@@ -27,6 +27,7 @@ html {
     border-radius: 28px;
     text-align: center;
 }
+
 .btn:focus {
     outline: 0;
 }
