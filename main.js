@@ -13,36 +13,32 @@ window.onload = function() {
     })
     cards.forEach(item => item.addEventListener('click', function() {
         flip(item)
+        console.log(flipCount)
     }));
 
 
 function flip (item) {
-
-    if(flipCount <= 1) {
-        if (flipOne !== item) {
+    if(flipCount === 0) {
+        flipOne = item;
+        item.classList.toggle('is-flipped');
+        flipCount+=1;
+        clicks+=1;
+        count.textContent = clicks;
+    } else if(flipCount === 1) {
+        if(item.classList.contains('is-flipped')) {
+            item.classList.toggle('is-flipped');
+            flipCount = 0;
+            clicks -= 1;
+            count.textContent = clicks;
+        } else {
+            item.classList.toggle('is-flipped')
+            checkMatch(item); 
             clicks += 1;
             count.textContent = clicks;
-            
-        } 
-        else if(flipOne === item) {
-            flipCount = 0;
         }
+    } 
 
-        if (flipCount === 0) {
-            item.classList.toggle('is-flipped');
-            flipOne = item
-            flipCount++;
-        } else {
-            item.classList.toggle('is-flipped');
-            flipCount++;
-            checkMatch(item);
-            
-        }
-
-    }
-}
-
-
+} 
 function checkMatch(item) {
     if (flipOne.lastElementChild.lastElementChild.src ===
         item.lastElementChild.lastElementChild.src) {
@@ -60,7 +56,7 @@ function checkMatch(item) {
         unflip(item);
     }
     if (flipsRemaining === 0) {
-        setTimeout(gameOver, 1000);
+        console.log('You won!');
         
     }
 }
