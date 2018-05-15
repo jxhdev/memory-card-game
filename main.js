@@ -12,7 +12,6 @@ window.onload = function() {
     })
     cards.forEach(item => item.addEventListener('click', function() {
         flip(item)
-        console.log(flipCount)
     }));
 
 
